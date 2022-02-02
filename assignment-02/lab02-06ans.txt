@@ -20,7 +20,7 @@ edX
     สำหรับ edX ในส่วนของหน้าหลักจะคล้ายกับ coursera ที่จะมี Course ต่าง ๆ มาให้เลือก แต่จะต่างที่เวลาเราลงชื่อเข้าใช้ไปแล้วจะไม่ได้เข้าหน้า Profile ให้เลย [4] สำหรับการสมัคร edX จะทำได้เร็วที่สุดเพราะกรอกข้อมูลน้อยกว่าที่อื่น
 แต่ก็แลกกับเราต้องหา course เองไม่ได้มีแนะนำมาให้ ส่วนเวลา enroll ก็คล้าย ๆ กับที่อื่น
 
-[1]
-[2]
-[3]
-[4]
+[1] https://github.com/nnininnine/SAD-assignments/blob/main/assignment-02/thaimooc-home.png
+[2] https://github.com/nnininnine/SAD-assignments/blob/main/assignment-02/coursera-home-first.png
+[3] https://github.com/nnininnine/SAD-assignments/blob/main/assignment-02/coursera-home-profile.png
+[4] https://github.com/nnininnine/SAD-assignments/blob/main/assignment-02/edx-home.png
