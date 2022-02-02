@@ -1,0 +1,23 @@
+ระบบนึงประกอบด้วย Web Server, Application Server และ Database Server จากข้อมูลต่อไปนี้ หากต้องการคำนวนหา availability ของทั้งระบบ จะมีวิธีการคำนวนอย่างไร จงค้นคว้าหาวิธีการคำนวนจาก Internet และระบุแหล่งอ้างอิงประกอบ กำหนดให้ 1 ปีเท่ากับ 365 วัน
+
+Web Server
+- MTBF: 8751.23 hours
+- MTTR: 8.77 hours
+
+Application Server
+- MTBF: 8716.08 hours
+- MTTR: 43.92 hours
+
+Database Server
+- MTBF: 8672.40 hours
+- MTTR: 87.60 hours
+
+การคำนวณ Availability ของแต่ละส่วน จากสูตร A = MTBF/(MTBF + MTTR)
+- Web Server -> A1 = 8751.23/(8751.23 + 8.77) = 0.998998 = 99.9% (3-nines)
+- Application Server -> A2 = 8716.08/(8716.08 + 43.92) = 0.994986 = 99.5%
+- Database Server -> A3 = 8672.40/(8672.40 + 87.60) = 0.99 = 99% (2-nines)
+
+คำนวณ Availability ของทั้งระบบจาก A = Ax * Ay เนื่องจากทั้งระบบต่อกันแบบ Series
+A = A1 * A2 * A3 = 0.998998 * 0.994986 * 0.99 = 0.984049 = 98.4% (Downtime = 5.84 days/year)
+
+ที่มา: https://www.eventhelix.com/fault-handling/system-reliability-availability/

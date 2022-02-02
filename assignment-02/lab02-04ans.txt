@@ -1,0 +1,25 @@
+จงเลือกมา 1 metric จากคำตอบของคำถามในข้อที่แล้ว และค้นหาข้อมูลแนวทางในการประเมินทรัพยากรที่ระบบต้องใช้
+(เช่น CPU, Memory) เพื่อรองรับความต้องการด้าน Performance ของ Web
+จงค้นคว้าหาข้อมูลจาก Internet เกี่ยวกับการทดสอบ Web Performance 
+ที่มีการกำหนดระดับทรัพยากรต่างๆ กัน พร้อมทั้งระบุแหล่งข้อมูลที่ใช้อ้างอิง เพื่อสรุปเป็นคำตอบ
+
+Requests per second (RPS)
+การประเมินทรัพยากรที่ระบบต้องใช้เพื่อรองรับกับความต้องการด้าน Performance
+สำหรับการประเมิน CPU จะคำนวณจาก
+    RPS = numofcores * (1 / Taskduration)
+ถ้ากลับสมการจะได้เป็น
+    numofcores = RPS * Taskduration
+ex. ถ้า CPU มี 4 cores และแต่ละ task ใช้เวลาที่ 10ms จะได้ RPS
+    RPS = 4 * (1 / (10 * 10^-3))
+    RPS = 4 * 100 = 400 RPS
+
+สำหรับการประเมิน RAM จะคำนวณจาก
+    RPS = (TotalRAM / Taskmemoryusage) * (1 / Taskduration)
+ถ้ากลับสมการจะได้เป็น
+    TotalRAM = RPS * Taskmemoryusage * Taskduration
+ex. ถ้า server มี RAM 16Gb Taskmemoryusage เป็น 40mb และ Taskduration เท่ากับ 10ms จะได้ RPS
+    RPS = ((16 * 10^9) / (40 * 10^6)) * (1 / (10 * 10^-3))
+    RPS = 4 * 10^2 * 10^2
+    RPS = 4 * 10000 = 40000 RPS
+
+ที่มา: https://medium.com/geekculture/how-to-calculate-server-max-requests-per-second-38a39bb96a85

@@ -1,0 +1,8 @@
+metrics ใดบ้างที่นิยมใช้ในการวัด Web Performance จงยกตัวอย่างมาอย่างน้อย 3 metrics
+จงค้นคว้าหาข้อมูลจาก Internet พร้อมทั้งระบุแหล่งข้อมูลที่ใช้อ้างอิง เพื่อสรุปเป็นคำตอบ
+
+1. Page speed - การวัดความเร็วในการโหลดหน้าเว็บไซต์ ซึ่งจะมีปัจจัย 3 อย่างคือ 1. Server response time หรือ Time to first byte(TTFB) 2. เวลามี่โหลด HTML web page 3. ระยะเวลาในการ render หน้าเว็บบน browser
+2. Requests per second - Requests per second หรือ Throughput คือ จำนวนของ Request ที่ Server ได้รับใน 1 วินาที 
+3. Error rate - Error rate จะวัดจากจำนวน error ที่เกิดขึ้นในช่วงเวลาหนึ่ง
+
+ที่มา: https://pantheon.io/blog/top-website-performance-metrics
