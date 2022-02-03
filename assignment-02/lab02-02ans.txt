@@ -1,8 +1,8 @@
 ในการเชื่อมต่อผ่าน Bluetooth ตามมาตรฐานกำหนดความสามารถให้ device สามารถค้นหา device อื่นๆ ที่พร้อมรับการเชื่อมต่อในบริเวณใกล้เคียงได้ จงเขียน Quality Attribute Scenario ของกรณีดังกล่าว
 
-Source of stimulus -> 
-Stimulus ->
-Artifacts -> 
-Environment -> 
-Response -> 
-Response measure -> 
+Source of stimulus -> Bluetooth device ที่ค้นหา device อื่น
+Stimulus -> ค้นหา Bluetooth device อื่น ๆ ที่พร้อมรับการเชื่อมต่อในบริเวณใกล้เคียงได้
+Artifacts -> Bluetooth device อื่น ๆ ที่อยู่บริเวณใกล้เคียง
+Environment -> บริเวณที่มี Bluetooth devices หลาย ๆ ตัวอยู่ในบริเวณใกล้เคียงกัน
+Response -> ตรวจสอบ device ที่ค้นหาเจอ, เชื่อมต่อ Bluetooth device
+Response measure -> จำนวน device ที่ค้นหาเจอเทียบกับ device ณ ขณะนั้น
