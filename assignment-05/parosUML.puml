@@ -1,0 +1,219 @@
+@startuml paros-UML
+
+Paros ..> Constant
+Paros ..> Model
+Paros ..> Control
+Paros ..> View
+
+Control --|> AbstractControl
+Control --> Proxy
+Control -- MenuFileControl
+Control -- MenuToolsControl
+Control ..> Session
+
+AbstractControl --> Model
+AbstractControl --> View
+
+Proxy --> Model
+Proxy --> ProxyServer
+Proxy --> ProxyServerSSL
+
+MenuFileControl --> View
+MenuFileControl --> Model
+MenuFileControl ..> Session
+
+MenuToolsControl --> View
+MenuToolsControl --> Model
+
+Model -- Session
+Model --> OptionsParam
+Model --> Database
+
+Session --|> FileXML
+
+OptionsParam --|> AbstractParam
+OptionsParam --> ProxyParam
+
+ProxyServer --> ProxyParam
+ProxyServer ..> ProxyThread
+
+ProxyServerSSL --|> ProxyServer
+ProxyServerSSL ..> ProxyThread
+
+ProxyParam --|> AbstractParam
+
+ProxyThread --o ProxyServer
+ProxyThread --> ProxyParam
+ProxyThread ..> HttpUtil
+
+View ..|> ViewDelegate
+
+class Paros {
+    - {static} log: Log
+    - cmdLine: CommandLine
+    + {static} main(args: String[])
+    - init(args: String[])
+    - run()
+}
+
+class Constant {
+    + {static} PROGRAM_NAME: String
+    + {static} PROGRAM_VERSION: String
+    + {static} VERSION_TAG: long
+    + {static} getEyeCatcher(): String
+    + {static} setEyeCatcher(eyeCatcher: String)
+    + {static} getInstance(): Constant
+}
+
+abstract class FileXML {
+    # doc: Document
+    # docBuilder: DocumentBuilder
+    # docBuilderFactory: DocumentBuilderFactory
+    + FileXML(rootElementName: String)
+    + getDocument(): Document
+    # getElement(base: Element, childTag: String): Element
+}
+
+abstract class AbstractParam {
+    - config: FileConfiguration
+    + load(config: FileConfiguration)
+    + load(fileName: String)
+    + getConfig(): FileConfiguration
+}
+
+class Database {
+    - {static} database: Database
+    - databaseServer: DatabaseServer
+    - tableHistory: TableHistory
+    + Database()
+    + getDatabaseServer(): DatabaseServer
+    - setDatabaseServer(databaseServer: DatabaseServer)
+}
+
+class Control {
+    - {static} log: Log
+    - {static} control: Control
+    - proxy: Proxy
+    - init()
+    + getProxy(): Proxy
+    # addExtension()
+}
+
+abstract class AbstractControl {
+    # loader: ExtensionLoader
+    # model: Model
+    # view: View
+    + getExtensionLoader(): ExtensionLoader
+    # loadExtension()
+    # {abstract} addExtension()
+}
+
+class Proxy {
+    - model: Model
+    - proxyServer: ProxyServer
+    - proxyServerSSL: ProxyServerSSL
+    + startServer()
+    + stopServer()
+    + setSerialize(serialize: boolean)
+}
+
+class MenuFileControl {
+    - view: View
+    - model: Model
+    - control: Control
+    + exit()
+    + newSession(isPromptNewSession: boolean)
+    + openSession()
+}
+
+class MenuToolsControl {
+    - view: View
+    - model: Model
+    - control: Control
+    + MenuToolsControl()
+    + MenuToolsControl(model: Model, view: View, control: Control)
+    + options()
+}
+
+interface ViewDelegate <<interface>>{
+    + getMainFrame(): MainFrame
+    + getSiteTreePanel(): SiteMapPanel
+    + getOutputPanel(): OutputPanel
+}
+
+class Model {
+    - session: Session
+    - optionsParam: OptionsParam
+	- db: Database
+    + Getters()/Setters()
+    + setOptionsParam(param: OptionsParam)
+    + init()
+}
+
+class Session {
+    - model: Model
+    - seesionDesc: String
+    - siteTree: SiteMap
+    + Getters()/Setters()
+    + discard()
+    # parse()
+}
+
+class OptionsParam {
+    - proxyParam: ProxyParam
+	- connectionParam: ConnectionParam
+	- viewParam: OptionsParamView
+    + Getters()/Setters()
+    + getParamSet(className: Class): AbstractParam
+    # parse()
+}
+
+class HttpUtil {
+    + {static} encodeURI(url: String): String
+    + {static} sleep(ms: int)
+    + {static} closeServerSocket(socket: ServerSocket)
+}
+
+class ProxyServer {
+    # thread: Thread
+    # proxySocket: ServerSocket
+    # proxyParam: ProxyParam
+    + isEnableCacheProcessing(): boolean
+    + setEnableCacheProcessing(enableCacheProcessing: boolean)
+    + isSerialize(): boolean
+}
+
+class ProxyServerSSL {
+    - {static} ssl: SSLConnector
+    + ProxyServerSSL()
+    # createServerSocket(ip: String, port: int): ServerSocket
+    # createProxyProcess(clientSocket: Socket): ProxyThread
+}
+
+class ProxyParam {
+    - proxyIp: String
+    - proxyPort: int
+    - proxySSLPort: int
+    # parse()
+    + getProxyIp(): String
+    + getProxyPort(): int
+}
+
+class ProxyThread {
+    # parentServer: ProxyServer
+    # proxyParam: ProxyParam
+    # connectionParam: ConnectionParam
+    + start()
+    - beginSSL()
+    + run()
+}
+
+class View {
+    - {static} view: View
+    - sessionDialog: SessionDialog
+    - optionsDialog: OptionsDialog
+    + init()
+    + postInit()
+    + showConfirmDialog(msg: String): int
+}
+@enduml
