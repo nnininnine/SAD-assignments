@@ -1,0 +1,10 @@
+1. ถ้าเกิด compute engine fail จะต้อง restart ภายใน 3 นาที
+2. การอัพเดต sql server จะต้องอัพเดตทีละตัวแล้วจึงย้ายไปอัพเดตตัวถัดไปโดยที่มี downtime น้อยกว่า 10 นาที
+3. ถ้าเกิด primary SQL fail, Availability Group จะเปลี่ยนไปใช้ Standby Instance SQL แทน และเริ่ม Recover primary SQL ภายในเวลาไม่เกิน 5 นาที
+4. ถ้า region r1 fails ต้องให้ระบบย้ายตัว compute engine ไปยัง region r2 ภายใน 5 นาที
+5. Real-time messaging server และ service discovery API สามารถขยายจำนวนแบบด้านข้างเพื่อรองรับจำนวนผู้ใช้ได้ทันที
+6. Service discovery cache ต้องตอบสนองการค้นหา topic จากฝั่ง service discovery API และ game services messaging API ได้ภายใน 1 วินาที
+7. PubSub Instance สามารถขยายจำนวนแบบด้านข้างให้รองรับ message จำนวนมาก, game service messaging API จะส่งแต่ละ message ไปที่ PubSub Instance ใดก็ได้ที่ว่างอยู่
+8. Application gateway ไม่อนุญาติให้การเชื่อมต่อจาก network ที่ไม่ได้ปลอดภัยมาเชื่อมต่อกับระบบ
+9. DDoS Protection สามารถป้องกันการโจมตีแบบ DDos ได้
+10. NSGs อนุญาตให้มีการเข้าถึงจาก subnet ที่อนุญาตเท่านั้น
