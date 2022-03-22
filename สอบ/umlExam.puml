@@ -1,0 +1,77 @@
+@startuml
+
+class MemberOfParliament extends Politician
+
+Parliament --> "0..1" Parliament
+Parliament *--> MemberOfParliament 
+Parliament *-- PrimeMinister
+
+class PrimeMinister extends Politician
+class PrimeMinister implements OrderIssuable
+PrimeMinister *-- Cabinet
+PrimeMinister ..> Minister : "<<create>>"
+
+Cabinet ..> Minister : "<<use>>"
+Cabinet *--> Minister
+
+class Minister extends Politician
+class Minister implements OrderIssuable
+
+abstract class Politician {
+    # name: String
+    + {abstract} debate(topic: String): void
+    + getName(): String
+    + setName(name: String): void
+}
+
+interface OrderIssuable {
+    + order(): String
+}
+
+class MemberOfParliament {
+    + debate(topic: String): void
+    + vote(): Boolean
+}
+
+class Parliament {
+    - {static} parliament: Parliament
+    - members: MemberOfParliament[]
+    - pm: PrimeMinister   
+
+    - Parliament()
+    + {static} getInstance() : Parliament
+    - countMembers(): int
+    + addMember(): void
+    + electPrimeMinister(): PrimeMinister
+}
+
+class PrimeMinister {
+    - parliament : Parliament
+    - cabinet : Cabinet
+
+    + PrimeMinister(parliament: Parliament)
+    + getCabinet(): Cabinet
+    + addMinister(ministry: String): void
+    + removeMinister(minister: Minister): void
+    + debate(topic: String): void
+    + order(): String
+}
+
+class Cabinet {
+    - pm: PrimeMinister
+    - ministers: Minister[]
+
+    + Cabinet(pm: PrimeMinister)
+    - countMinisters(): int
+    + addMinister(minister: Minister): void
+    + removeMinister(minister: Minister): void
+}
+
+class Minister {
+    - ministry: String
+    
+    + Minister(minister: String)
+    + debate(topic: String): void
+    + order(): String
+}
+@enduml
