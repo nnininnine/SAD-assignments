@@ -1,3 +1,54 @@
 @startuml
 
+    Class AgeSortStrategy implements SortStrategy
+    Class HeightSortStrategy implements SortStrategy
+    Class NameSortStrategy implements SortStrategy
+    Class WeightSortStrategy implements SortStrategy
+
+    People o--> Person
+    People o--> SortStrategy
+  
+    Class AgeSortStrategy {
+        + customSort(people: List<Person>): void
+    }
+
+    class HeightSortStrategy {
+        + customSort(people: List<Person>): void
+    }
+
+    class NameSortStrategy {
+        + customSort(people: List<Person>): void
+    }
+
+    class People {
+        - members: List<Person>
+        - sortStrategy: SortStrategy
+        + People()
+        + setSortStrategy(sortStrategy: SortStrategy): void
+        + addMember(p: Person): void
+        + print(out: PrintStream): void
+    }
+
+    class Person {
+        - name: String
+        - age: Integer
+        - height: Integer
+        - weight: Integer
+        + getName(): String
+        + getAge(): Integer
+        + getHeight(): Integer
+        + getWeight(): Integer
+        + setName(name: String): void
+        + setAge(age: String): void
+        + setHeight(height: String): void
+        + setWeight(weight: String): void
+    }
+
+    interface SortStrategy {
+        + customSort(people: List<Person>): void
+    }
+
+    class WeightSortStrategy {
+        + customSort(people: List<Person>): void
+    }
 @enduml
