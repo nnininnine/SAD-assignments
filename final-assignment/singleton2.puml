@@ -1,0 +1,26 @@
+@startuml
+
+    Explosion ..> EventFactory: <<use>>
+    BlockGrass ..> EventFactory: <<use>>
+    EventFactory *--> EventFactory : <<create>>
+
+    Class Explosion {
+        - source: Entity
+        - power: float
+        - yield: float
+        + explodeWithEvent(): boolean
+        - setBlockOnFire(block: GlowBlock): void
+    }
+
+    Class BlockGrass {
+        + BlockGrass()
+        + grow(player: GlowPlayer, block: GlowBlock): void
+    }
+
+    Class EventFactory {
+        - {static} instance: EventFactory
+        - EventFactory()
+        + {static} getInstance(): EventFactory
+    }
+
+@enduml
